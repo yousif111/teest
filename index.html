@@ -1,25 +1,33 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>View</title>
+    <title>عدد المشاهدات</title>
 </head>
 <body>
-    <h1>Test</h1>
-    <p>View</p>
-    <div id="visitorsCount">جاري الاحتساب...</div>
+
+    <p>عدد المشاهدات:</p>
+    <span id="viewsCount">0</span>
 
     <script>
-        // قم بإنشاء متغير لتخزين عدد الزوار
-        let visitorsCount = 0;
+        // استعلام لجلب عدد المشاهدات من ذاكرة الجلسة (sessionStorage)
+        var views = sessionStorage.getItem("views");
 
-        // قم بزيادة عدد الزوار عند تحميل الصفحة
-        visitorsCount++;
+        if (views === null) {
+            // إذا كانت قيمة المشاهدات غير معرفة، ضعها على أنها 0
+            views = 0;
+        } else {
+            // إذا كانت هناك قيمة معرفة، قم بتحويلها إلى عدد صحيح
+            views = parseInt(views);
+        }
 
-        // قم بعرض عدد الزوار في العنصر ذو id "visitorsCount"
-        document.getElementById("visitorsCount").textContent = visitorsCount;
+        // زيادة عدد المشاهدات بواحد عند كل تحميل للصفحة
+        views++;
+
+        // عرض عدد المشاهدات على الصفحة
+        document.getElementById("viewsCount").textContent = views;
+
+        // حفظ القيمة الجديدة في ذاكرة الجلسة (sessionStorage)
+        sessionStorage.setItem("views", views.toString());
     </script>
 </body>
 </html>
